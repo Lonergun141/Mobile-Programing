@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eyy</title>
+  </head>
+  <body>
+    <div id="myApp"></div>
+
+    <script>
+      // Create a container div for centering the input field
+      let kini = document.getElementById("myApp"); // Select the existing 'myApp' div
+
+      let sudlanan = document.createElement("div");
+      sudlanan.style.display = "flex";
+      sudlanan.style.flexDirection = "column";
+      sudlanan.style.alignItems = "center";
+      sudlanan.style.justifyContent = "center";
+      sudlanan.align = "center";
+      sudlanan.style.height = "100vh";
+
+      let inputContainer = document.createElement("div");
+      inputContainer.style.display = "flex";
+      inputContainer.style.flexDirection = "column";
+      inputContainer.style.marginBottom = "10px";
+
+      let email = document.createElement("input");
+      email.type = "email";
+      email.placeholder = "Email";
+      email.style.padding = "10px";
+      email.style.borderLeft = "none";
+      email.style.borderRight = "none";
+      email.style.borderTop = "none";
+      email.borderBottom = "5px solid black";
+      email.style.width = "100%";
+      email.style.fontSize = "21px";
+
+      let errorPrompt = document.createElement("p");
+      errorPrompt.style.color = "red";
+      errorPrompt.style.fontSize = "15px";
+      errorPrompt.style.textAlign = "left";
+
+      let passinput = document.createElement("input");
+      passinput.type = "password";
+      passinput.placeholder = "Password";
+      passinput.style.padding = "10px";
+      passinput.style.borderLeft = "none";
+      passinput.style.borderRight = "none";
+      passinput.style.borderTop = "none";
+      passinput.borderBottom = "5px solid black";
+      passinput.style.width = "100%";
+      passinput.style.fontSize = "21px";
+
+      let passwordStrength = document.createElement("p");
+      passwordStrength.className = "password-strength";
+      passwordStrength.style.color = "red";
+      passwordStrength.style.fontSize = "15px";
+      passwordStrength.style.textAlign = "left";
+
+      email.addEventListener("input", (event) => {
+        if (
+          !event.target.value.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          )
+        ) {
+          errorPrompt.textContent = "Invalid email address";
+        } else {
+          errorPrompt.textContent = "";
+        }
+      });
+
+      email.addEventListener("input", (event) => {
+        if (event.target.value.trim() === "") {
+          errorPrompt.textContent = "";
+        }
+      });
+
+      passinput.addEventListener("input", (event) => {
+        const password = event.target.value;
+        const strengthMessage = checkPasswordStrength(password);
+        passwordStrength.textContent = strengthMessage;
+
+        if (password === "") {
+          passwordStrength.textContent = "";
+        }
+      });
+
+      function checkPasswordStrength(password) {
+        if (password.length < 8) {
+          return "Password is too short";
+        } else if (
+          !/[a-z]/.test(password) ||
+          !/[A-Z]/.test(password) ||
+          !/\d/.test(password)
+        ) {
+          return "Password is not strong enough";
+        } else if (/(\w).*\1/.test(password)) {
+          return "Password has duplicate characters";
+        } else {
+          return "Password is strong";
+        }
+      }
+
+      inputContainer.append(email, errorPrompt, passinput, passwordStrength);
+      sudlanan.appendChild(inputContainer);
+      kini.appendChild(sudlanan);
+    </script>
+  </body>
+</html>
