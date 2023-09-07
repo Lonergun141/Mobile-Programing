@@ -40,6 +40,7 @@
       errorPrompt.style.color = "red";
       errorPrompt.style.fontSize = "15px";
       errorPrompt.style.textAlign = "left";
+      errorPrompt.style.fontweight = "bold";
 
       let passinput = document.createElement("input");
       passinput.type = "password";
@@ -78,8 +79,9 @@
 
       passinput.addEventListener("input", (event) => {
         const password = event.target.value;
-        const strengthMessage = checkPasswordStrength(password);
+        var strengthMessage = checkPasswordStrength(password);
         passwordStrength.textContent = strengthMessage;
+        passwordStrength.style.fontWeight = "bold";
 
         if (password === "") {
           passwordStrength.textContent = "";
@@ -95,10 +97,10 @@
           !/\d/.test(password)
         ) {
           return "Password is not strong enough";
-        } else if (/(\w).*\1/.test(password)) {
-          return "Password has duplicate characters";
         } else {
+          passwordStrength.style.color = 'green'
           return "Password is strong";
+          
         }
       }
 
