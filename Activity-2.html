@@ -11,14 +11,24 @@
     <script>
       // Create a container div for centering the input field
       let kini = document.getElementById("myApp"); // Select the existing 'myApp' div
+      kini.style.display = "flex";
+      kini.style.justifyContent ="center";
+      kini.style.alignItems ="center";
+      kini.style.height ="100vh";
 
       let sudlanan = document.createElement("div");
       sudlanan.style.display = "flex";
-      sudlanan.style.flexDirection = "column";
       sudlanan.style.alignItems = "center";
       sudlanan.style.justifyContent = "center";
-      sudlanan.align = "center";
-      sudlanan.style.height = "100vh";
+      sudlanan.style.height = "500px";
+      sudlanan.style.width = "800px";
+      sudlanan.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
+      sudlanan.style.borderRadius = '10px'
+
+      let log = document.createElement('h1');
+      log.style.marginBottom = '55px';
+      log.style.textAlign = 'center';
+      log.style.fontFamily = "Arial, sans-serif"
 
       let inputContainer = document.createElement("div");
       inputContainer.style.display = "flex";
@@ -27,7 +37,7 @@
 
       let email = document.createElement("input");
       email.type = "email";
-      email.placeholder = "Email";
+      email.placeholder = "Emale";
       email.style.padding = "10px";
       email.style.borderLeft = "none";
       email.style.borderRight = "none";
@@ -44,7 +54,7 @@
 
       let passinput = document.createElement("input");
       passinput.type = "password";
-      passinput.placeholder = "Password";
+      passinput.placeholder = "Passweird";
       passinput.style.padding = "10px";
       passinput.style.borderLeft = "none";
       passinput.style.borderRight = "none";
@@ -90,21 +100,25 @@
 
       function checkPasswordStrength(password) {
         if (password.length < 8) {
+          passwordStrength.style.color = "red";
           return "Password is too short";
         } else if (
           !/[a-z]/.test(password) ||
           !/[A-Z]/.test(password) ||
-          !/\d/.test(password)
+          !/\d/.test(password) ||
+          !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password)
         ) {
-          return "Password is not strong enough";
+          passwordStrength.style.color = "red";
+          return "Password is not strong enough add some special characters";
         } else {
-          passwordStrength.style.color = 'green'
+          passwordStrength.style.color = "green";
           return "Password is strong";
-          
         }
       }
 
-      inputContainer.append(email, errorPrompt, passinput, passwordStrength);
+      log.innerText = "Sulod Lang"
+
+      inputContainer.append(log, email, errorPrompt, passinput, passwordStrength);
       sudlanan.appendChild(inputContainer);
       kini.appendChild(sudlanan);
     </script>
