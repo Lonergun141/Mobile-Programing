@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="myApp"></div>
+
+    <script>
+      let akongapp = document.getElementById("myApp");
+
+      let gawascon = document.createElement("div");
+      gawascon.style.display = "flex";
+      gawascon.style.justifyContent = "center";
+      gawascon.style.alignItems = "center";
+      gawascon.style.height = "100vh";
+
+      let sudlanan = document.createElement("div");
+      sudlanan.style.display = "flex";
+      sudlanan.style.flexDirection = "column";
+
+      let tay = document.createElement("h1");
+      tay.style.marginBottom = "15px";
+      tay.style.fontSize = "45px";
+      tay.innerText = "Sulod Lang";
+      tay.style.textAlign = "center";
+
+      let email = document.createElement("input");
+      email.type = "Email";
+      email.placeholder = "Emale";
+      email.style.border = "2px solid";
+      email.style.padding = "15px";
+      email.style.width = "300px";
+
+      let error = document.createElement("p");
+      error.style.color = "red";
+      error.style.fontSize = "9px";
+      error.style.textAlign = "left";
+      error.style.fontweight = "bold";
+
+      email.addEventListener("input", (event) => {
+        if (
+          !event.target.value.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          )
+        ) {
+          error.textContent = "Invalid email address";
+        } else {
+          error.textContent = "";
+        }
+      });
+
+      sudlanan.append(tay, email,error);
+      gawascon.append(sudlanan);
+      akongapp.append(gawascon);
+    </script>
+  </body>
+</html>

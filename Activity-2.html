@@ -9,6 +9,13 @@
     <div id="myApp"></div>
 
     <script>
+
+      let data = {
+        'firstname' :'',
+        'lastname' :'',
+        'email' :'',
+        'password' :'',
+      }
       // Create a container div for centering the input field
       let kini = document.getElementById("myApp"); // Select the existing 'myApp' div
       kini.style.display = "flex";
@@ -35,7 +42,39 @@
       inputContainer.style.flexDirection = "column";
       inputContainer.style.marginBottom = "10px";
 
+      let firstname = document.createElement("input");
+      firstname.addEventListener("input", (event) => {
+        data.firstname = event.target.value;
+       
+      });
+      firstname.placeholder = "First name";
+      firstname.style.padding = "10px";
+      firstname.style.borderLeft = "none";
+      firstname.style.borderRight = "none";
+      firstname.style.borderTop = "none";
+      firstname.style.borderBottom = "2px solid black";
+      firstname.style.width = "100%";
+      firstname.style.fontSize = "21px";
+
+      let lastname = document.createElement("input");
+      lastname.addEventListener("input", (event) => {
+        data.lastname = event.target.value;
+       
+      });
+      lastname.placeholder = "Last name";
+      lastname.style.padding = "10px";
+      lastname.style.borderLeft = "none";
+      lastname.style.borderRight = "none";
+      lastname.style.borderTop = "none";
+      lastname.style.borderBottom = "2px solid black";
+      lastname.style.width = "100%";
+      lastname.style.fontSize = "21px";
+
       let email = document.createElement("input");
+      email.addEventListener("input", (event) => {
+        data.email = event.target.value;
+       
+      });
       email.type = "email";
       email.placeholder = "Emale";
       email.style.padding = "10px";
@@ -52,22 +91,60 @@
       errorPrompt.style.textAlign = "left";
       errorPrompt.style.fontweight = "bold";
 
-      let passinput = document.createElement("input");
-      passinput.type = "password";
-      passinput.placeholder = "Passweird";
-      passinput.style.padding = "10px";
-      passinput.style.borderLeft = "none";
-      passinput.style.borderRight = "none";
-      passinput.style.borderTop = "none";
-      passinput.borderBottom = "5px solid black";
-      passinput.style.width = "100%";
-      passinput.style.fontSize = "21px";
+      let password= document.createElement("input");
+      password.addEventListener("input", (event) => {
+        data.password= event.target.value;
+      
+      });
+      password.type = "password";
+      password.placeholder = "Passweird";
+      password.style.padding = "10px";
+      password.style.borderLeft = "none";
+      password.style.borderRight = "none";
+      password.style.borderTop = "none";
+      password.borderBottom = "5px solid black";
+      password.style.width = "100%";
+      password.style.fontSize = "21px";
+
+      
+      let cpassword= document.createElement("input");
+      cpassword.type = "password";
+      cpassword.placeholder = "Confirm Passweird";
+      cpassword.style.padding = "10px";
+      cpassword.style.borderLeft = "none";
+      cpassword.style.borderRight = "none";
+      cpassword.style.borderTop = "none";
+      cpassword.borderBottom = "5px solid black";
+      cpassword.style.width = "100%";
+      cpassword.style.fontSize = "21px";
 
       let passwordStrength = document.createElement("p");
       passwordStrength.className = "password-strength";
       passwordStrength.style.color = "red";
       passwordStrength.style.fontSize = "15px";
       passwordStrength.style.textAlign = "left";
+
+      let errorMessage = document.createElement("p");
+    
+      errorMessage.style.fontSize = "15px";
+      errorMessage.style.textAlign = "center";
+
+      let button = document.createElement("button");
+      button.innerHTML = "Sign Up";
+      button.style.padding = "20px"; 
+      
+      button.addEventListener("click",(event) =>{
+        if(data.firstname === "" || data.lastname === "" || !email.value.match( /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+        ||password.value !== cpassword.value)
+        {
+          errorMessage.innerText = "Invalid credentials";
+          errorMessage.style.color = "red";
+        }else{
+          errorMessage.innerText ="hali bay";
+          errorMessage.style.color = "green";
+          console.log(data);
+        }
+      })
 
       email.addEventListener("input", (event) => {
         if (
@@ -87,7 +164,7 @@
         }
       });
 
-      passinput.addEventListener("input", (event) => {
+      password.addEventListener("input", (event) => {
         const password = event.target.value;
         var strengthMessage = checkPasswordStrength(password);
         passwordStrength.textContent = strengthMessage;
@@ -101,7 +178,7 @@
       function checkPasswordStrength(password) {
         if (password.length < 8) {
           passwordStrength.style.color = "red";
-          return "Password is too short";
+          return "gamaya ana imo chuy uy";
         } else if (
           !/[a-z]/.test(password) ||
           !/[A-Z]/.test(password) ||
@@ -109,7 +186,7 @@
           !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password)
         ) {
           passwordStrength.style.color = "red";
-          return "Password is not strong enough add some special characters";
+          return "ipa gahi pa chuy";
         } else {
           passwordStrength.style.color = "green";
           return "";
@@ -118,7 +195,7 @@
 
       log.innerText = "Sulod Lang"
 
-      inputContainer.append(log, email, errorPrompt, passinput, passwordStrength);
+      inputContainer.append(log,firstname,lastname, email, errorPrompt, password, cpassword, passwordStrength, errorMessage, button);
       sudlanan.appendChild(inputContainer);
       kini.appendChild(sudlanan);
     </script>
